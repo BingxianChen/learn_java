@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=ch
+comment0.target=boolean\ isVowel(char)
+comment1.params=phrase\ ch
+comment1.target=java.lang.String\ replaceVowels(java.lang.String,\ char)
+comment2.params=input\ key
+comment2.target=java.lang.String\ encrypt(java.lang.String,\ int)
+comment3.params=
+comment3.target=void\ testCaesar()
+numComments=4
