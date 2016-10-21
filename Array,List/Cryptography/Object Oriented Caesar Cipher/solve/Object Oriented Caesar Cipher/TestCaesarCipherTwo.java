@@ -1,30 +1,13 @@
 
 /**
- * Write a description of CaesarBreaker here.
+ * Write a description of TestCaesarCipherTwo here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
 import edu.duke.*;
 import java.util.*;
-public class CaesarBreaker {
-    public String decrypt(String encrypted,int key){
-        CaesarCipher cc = new CaesarCipher();
-        String message = cc.encrypt(encrypted, 26 - key);
-        return message;
-    }
-    
-    public void testDecrypt(){
-        CaesarCipher cc = new CaesarCipher();
-        int key = 12;
-        FileResource resource = new FileResource();
-        String message = resource.asString();
-        String encrypted = cc.encrypt(message,key);
-        System.out.println("encrypted: " + encrypted);
-        String decrypted = decrypt(encrypted,key);
-        System.out.println("decrypted: " + decrypted);
-    }
-    
+public class TestCaesarCipherTwo {
     public String halfOfString(String message, int start){
         int count = 0;
         StringBuffer newMessage = new StringBuffer();
@@ -69,13 +52,14 @@ public class CaesarBreaker {
         return key;   
     }
     
-    public String decryptTwoKeys(String encrypted){
-        String firstString = halfOfString(encrypted,0);
-        String lastString  = halfOfString(encrypted,1);
+    public void breakCaesarCipher(String input){
+        String firstString = halfOfString(input,0);
+        String lastString  = halfOfString(input,1);
         int key1 = 0;
         int key2 = 0;
         for (int i = 0; i < 26; i++){
-            String s = decrypt(firstString, i);
+            CaesarCipher cc = new CaesarCipher(i);
+            String s = cc.decrypt(firstString);
             if (getKey(s) == 4){
                 key1 = i;
                 break;
@@ -84,31 +68,38 @@ public class CaesarBreaker {
         System.out.println("key1: " + key1);
         
          for (int i = 0; i < 26; i++){
-            String s = decrypt(lastString, i);
+            CaesarCipher cc = new CaesarCipher(i);
+            String s = cc.decrypt(lastString);
             if (getKey(s) == 4){
                 key2 = i;
                 break;
             }
         }
         System.out.println("key2: " + key2);
-        
-        CaesarCipher cc = new CaesarCipher();
-        String decrypted = cc.encryptTwoKeys(encrypted,26 - key1,26 - key2);
-        System.out.println(decrypted);
-        return decrypted;
+        CaesarCipherTwo cc = new CaesarCipherTwo(key1, key2);
+        String decrypted = cc.decrypt(input);
+        System.out.println("decrypt the message: " + decrypted);
+    
     }
     
-    public void testdecryptTwoKeys(String encrypted){
-        CaesarCipher cc = new CaesarCipher();
-        String decrypted = cc.encryptTwoKeys(encrypted,26 - 14,26 - 24);
-        System.out.println(decrypted);
+    
+    
+    
+    
+    
+    
+    
+    public void simpleTests(){
+        FileResource file = new FileResource();
+        String input = file.asString();
+        CaesarCipherTwo cc = new CaesarCipherTwo(17,3);
+        String encrypted = cc.encrypt(input);
+        System.out.println("encrypt: " + encrypted);
+        String decrypted = cc.decrypt(input);
+        System.out.println("decrypt: " + decrypted);
+        breakCaesarCipher(input);
     }
     
-    public void testdecryptTwoKeysFromFile(){
-         FileResource resource = new FileResource();
-         String s = decryptTwoKeys(resource.asString());
-         System.out.println(s);
-    }
     
     
     
