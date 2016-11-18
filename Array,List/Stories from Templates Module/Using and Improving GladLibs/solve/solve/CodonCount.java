@@ -60,7 +60,7 @@ public class CodonCount {
             String commonCodons = getMostCommonCodon();
             System.out.println("Reading frame starting with " + i + " results in " + uniqueCodons + " unique codons");
             System.out.println("    and most common codon is " + commonCodons + "with count " + codons.get(commonCodons.substring(0,3)));
-            printCodonCounts(1,5);
+            printCodonCounts(5,8);
             System.out.println();
         }
     

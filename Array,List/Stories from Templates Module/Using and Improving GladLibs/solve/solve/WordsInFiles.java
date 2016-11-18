@@ -71,26 +71,24 @@ public class WordsInFiles {
         int maxNum = maxNumber();
         System.out.println("maxNum is: " + maxNum);
         System.out.println("max words is");
-        ArrayList<String> files = wordsInNumFiles(maxNum);
-        for (String s : files){
-            System.out.println(s);
-            printFilesIn(s);
-        }
+        ArrayList<String> files = wordsInNumFiles(5);
+        //System.out.println("total words occur in five files: " + files.size());
+        System.out.println("total words occur in four files: " + wordsInNumFiles(4).size());
+        printFilesIn("tree");
+        //printFilesIn("red");
         
         
-        
-        
-        System.out.println("**************************************");
-        StringBuffer sb = new StringBuffer();
-        for (String s : maps.keySet()){
-            sb.delete(0,sb.length());
-            ArrayList<String> fileList = maps.get(s);
-            sb.append(s+":  ");
-            for(String f : fileList){
-                sb.append(f + " ");
-            }
-            System.out.println(sb.toString());
-        }
+        //System.out.println("**************************************");
+        //StringBuffer sb = new StringBuffer();
+        //for (String s : maps.keySet()){
+        //    sb.delete(0,sb.length());
+        //    ArrayList<String> fileList = maps.get(s);
+        //    sb.append(s+":  ");
+        //    for(String f : fileList){
+        //        sb.append(f + " ");
+        //    }
+        //    System.out.println(sb.toString());
+        //}
     
     }
     
