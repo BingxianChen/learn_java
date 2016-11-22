@@ -22,4 +22,22 @@ public class Tester
         lay.readFile("short-test_log");
         lay.printAll();
     }
+    
+    public void textUniqueIp(){
+        LogAnalyzer lay = new LogAnalyzer();
+        lay.readFile("weblog1_log");
+        lay.printAllHigherThanNum(400);
+        System.out.println("Unique ip number is: " + lay.countUniquelPs());
+        
+        
+        //lay.readFile("weblog-short_log");
+        ArrayList<String> uniIpDay = lay.uniqueIPVisitsOnDay("Mar 24");
+        System.out.println(uniIpDay.size());
+        
+        //lay.readFile("short-test_log");
+        int uniIp = lay.countUniqueIPsInRange(200,299);
+        System.out.println(uniIp);
+    
+    }
+    
 }
