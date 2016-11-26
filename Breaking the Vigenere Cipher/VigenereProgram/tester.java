@@ -11,8 +11,8 @@ public class tester {
         FileResource fr = new FileResource();
         String s = fr.asString();
         VigenereBreaker vb = new VigenereBreaker();
-        int[] keys = vb.tryKeyLength(s,5,'e');
-        for (int i = 0; i < 5 ; i++){
+        int[] keys = vb.tryKeyLength(s,4,'e');
+        for (int i = 0; i < 4 ; i++){
             System.out.println(keys[i]);
         }
 
