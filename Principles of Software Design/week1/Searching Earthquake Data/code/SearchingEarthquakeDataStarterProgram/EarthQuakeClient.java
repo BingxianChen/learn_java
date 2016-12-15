@@ -9,7 +9,11 @@ public class EarthQuakeClient {
     public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData,
     double magMin) {
         ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
-        // TODO
+        for (QuakeEntry qe: quakeData){
+            if (qe.getMagnitude() > magMin){
+                answer.add(qe);
+            }
+        }
 
         return answer;
     }
@@ -18,11 +22,52 @@ public class EarthQuakeClient {
     double distMax,
     Location from) {
         ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
-        // TODO
+        for (QuakeEntry qe: quakeData){
+            if(qe.getLocation().distanceTo(from)/1000 < distMax){
+                answer.add(qe);
+            }
+        }
+
+        return answer;
+    }
+    
+    public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData,
+    double minDepth,
+    double maxDepth){
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for (QuakeEntry qe: quakeData){
+            if((qe.getDepth() > minDepth) && (qe.getDepth() < maxDepth) ){
+                answer.add(qe);
+            }
+        }
 
         return answer;
     }
 
+    public ArrayList<QuakeEntry> filterByPhrase(ArrayList<QuakeEntry> quakeData,
+    String where,
+    String pharse){
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for (QuakeEntry qe: quakeData){
+            if(where.equals("start") && (qe.getInfo().startsWith(pharse))){
+                answer.add(qe);
+                continue;
+            }
+            
+            if(where.equals("end") && (qe.getInfo().endsWith(pharse))){
+                answer.add(qe);
+                continue;
+            }
+            
+            if(where.equals("any") && (qe.getInfo().indexOf(pharse) != -1)){
+                answer.add(qe);
+            }
+        }
+
+        return answer;
+    }
+
+    
     public void dumpCSV(ArrayList<QuakeEntry> list){
         System.out.println("Latitude,Longitude,Magnitude,Info");
         for(QuakeEntry qe : list){
@@ -38,27 +83,64 @@ public class EarthQuakeClient {
     public void bigQuakes() {
         EarthQuakeParser parser = new EarthQuakeParser();
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedata.atom";
+        String source = "data/nov20quakedatasmall.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         System.out.println("read data for "+list.size()+" quakes");
-
+        ArrayList<QuakeEntry> answer = filterByMagnitude(list,5.0);
+        for (QuakeEntry qe:  answer){
+            System.out.println(qe.toString());
+        }
+        System.out.println("read data for "+answer.size()+" quakes");
     }
 
     public void closeToMe(){
         EarthQuakeParser parser = new EarthQuakeParser();
-        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedatasmall.atom";
         ArrayList<QuakeEntry> list  = parser.read(source);
         System.out.println("read data for "+list.size()+" quakes");
 
         // This location is Durham, NC
-        Location city = new Location(35.988, -78.907);
+        //Location city = new Location(35.988, -78.907);
 
         // This location is Bridgeport, CA
-        // Location city =  new Location(38.17, -118.82);
-
-        // TODO
+        Location city =  new Location(38.17, -118.82);
+        
+        ArrayList<QuakeEntry> answer = filterByDistanceFrom(list,1000,city);
+        for (QuakeEntry qe: answer){
+            System.out.println(qe.getLocation().distanceTo(city)/1000 + " " + qe.getInfo());
+        }
+        System.out.println("read data for "+answer.size()+" quakes");
+    }
+    
+    public void quakesOfDepth(){
+        EarthQuakeParser parser = new EarthQuakeParser();
+        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list  = parser.read(source);
+        System.out.println("read data for "+list.size()+" quakes");
+        ArrayList<QuakeEntry> answer = filterByDepth(list,-10000.0,-5000.0);
+        for (QuakeEntry qe:  answer){
+            System.out.println(qe.toString());
+        }
+        System.out.println("read data for "+answer.size()+" quakes");
     }
 
+    public void quakesByPhrase(){
+        EarthQuakeParser parser = new EarthQuakeParser();
+        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list  = parser.read(source);
+        System.out.println("read data for "+list.size()+" quakes");
+        //ArrayList<QuakeEntry> answer = filterByPhrase(list,"end","California");
+        //ArrayList<QuakeEntry> answer = filterByPhrase(list,"any","Can");
+        ArrayList<QuakeEntry> answer = filterByPhrase(list,"start","Explosion");
+        for (QuakeEntry qe:  answer){
+            System.out.println(qe.toString());
+        }
+        System.out.println("read data for "+answer.size()+" quakes");
+    }
+    
     public void createCSV(){
         EarthQuakeParser parser = new EarthQuakeParser();
         String source = "data/nov20quakedatasmall.atom";
@@ -70,5 +152,6 @@ public class EarthQuakeClient {
             System.out.println(qe);
         }
     }
+   
     
 }
