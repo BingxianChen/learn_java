@@ -53,7 +53,7 @@ public class LargestQuakes {
         System.out.println(list.get(largestIndex).toString());
         System.out.println("*********************************************");
         
-        ArrayList<QuakeEntry> ret = getLargest(list,5);
+        ArrayList<QuakeEntry> ret = getLargest(list,50);
         for (QuakeEntry qe: ret){
             System.out.println(qe.toString());
         }
