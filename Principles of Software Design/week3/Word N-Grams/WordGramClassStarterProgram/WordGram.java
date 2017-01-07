@@ -52,6 +52,10 @@ public class WordGram {
         return out;
     }
     
-    
+    public int hashCode(){
+        myHash = toString().hashCode();
+        return myHash;
+    }
+   
 
 }

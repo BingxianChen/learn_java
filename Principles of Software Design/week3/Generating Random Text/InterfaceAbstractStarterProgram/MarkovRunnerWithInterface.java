@@ -45,9 +45,11 @@ public class MarkovRunnerWithInterface {
         st = st.replace('\n', ' ');
         //String st = "yes-this-is-a-thin-pretty-pink-thistle";
         int size = 50;
-        int seed = 615;
+        int seed = 531;
         EfficientMarkovModel mThree = new EfficientMarkovModel(5);
-        runModel(mThree, st, size, seed);
+        //runModel(mThree, st, size, seed);
+        mThree.setTraining(st);
+        mThree.setRandom(seed);
         mThree.printHashMapInfo();
 
     }

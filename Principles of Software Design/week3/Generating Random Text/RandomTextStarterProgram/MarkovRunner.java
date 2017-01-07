@@ -15,9 +15,10 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 		//MarkovZero markov = new MarkovZero();
 		MarkovOne markov = new MarkovOne();
-		markov.setRandom(273);
+		markov.setRandom(365);
 		markov.setTraining(st);
 		for(int k=0; k < 3; k++){
+		    //markov.setRandom(273);
 			String text = markov.getRandomText(500);
 			printOut(text);
 		}
@@ -29,7 +30,7 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 		//MarkovZero markov = new MarkovZero();
 		MarkovFour markov = new MarkovFour();
-		markov.setRandom(371);
+		markov.setRandom(715);
 		markov.setTraining(st);
 		for(int k=0; k < 3; k++){
 			String text = markov.getRandomText(500);
@@ -43,8 +44,8 @@ public class MarkovRunner {
 		String st = fr.asString();
 		st = st.replace('\n', ' ');
 		//MarkovZero markov = new MarkovZero();
-		MarkovModel markov = new MarkovModel(8);
-		markov.setRandom(365);
+		MarkovModel markov = new MarkovModel(7);
+		markov.setRandom(953);
 		markov.setTraining(st);
 		for(int k=0; k < 3; k++){
 			String text = markov.getRandomText(500);

@@ -78,7 +78,7 @@ public class EfficientMarkovModel extends AbstractMarkovModel{
         int max = 0;
         String maxKey = "";
         for(String key:map.keySet()){
-            System.out.println(key + " : " + map.get(key));
+            //System.out.println(key + " : " + map.get(key));
             if (max < map.get(key).size()){
                 max = map.get(key).size();
                 maxKey = key;
@@ -88,12 +88,13 @@ public class EfficientMarkovModel extends AbstractMarkovModel{
         System.out.println("number of keys is : " + map.size());
         System.out.println("size of the largest value in the HashMap : " + max);
         System.out.println("keys that have the maximum size value : ");
-        
+        /*
         for(String key:map.keySet()){
             if (max == map.get(key).size()){
                 System.out.println(key);
             }
         }
+        */
     }
     
 

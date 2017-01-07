@@ -34,6 +34,6 @@ public class Tester {
 		ArrayList<String> arr = new ArrayList<String>();
 		arr = markov.getFollows("o");
 		System.out.println("o: " + arr.size());
-		System.out.println("th: " + markov.getFollows("th").size());
+		System.out.println("he: " + markov.getFollows("he").size());
     }
 }

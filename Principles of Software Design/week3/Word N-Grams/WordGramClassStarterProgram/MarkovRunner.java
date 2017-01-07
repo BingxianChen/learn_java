@@ -32,9 +32,22 @@ public class MarkovRunner {
         FileResource fr = new FileResource(); 
         String st = fr.asString(); 
         st = st.replace('\n', ' '); 
-        //MarkovWordOne markovWord = new MarkovWordOne(); 
-        //runModel(markovWord, st, 200); 
+        MarkovWord markovWord = new MarkovWord(5); 
+        runModel(markovWord, st, 200, 844); 
     } 
+    
+    public void testHashMap() { 
+        FileResource fr = new FileResource(); 
+        String st = fr.asString(); 
+        st = st.replace('\n', ' ');
+        //String st = "this is a test yes this is really a test yes a test this is wow";
+        EfficientMarkovWord markovWord = new EfficientMarkovWord(2); 
+        runModel(markovWord, st, 50, 65);
+        //markovWord.setTraining(st);
+        //markovWord.setRandom(42);
+        markovWord.printHashMapInfo();
+    } 
+    
 
     private void printOut(String s){
         String[] words = s.split("\\s+");
